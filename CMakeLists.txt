@@ -25,7 +25,9 @@ FetchContent_Populate(NAMCore)   # ソースだけ取得（NAM側のCMakeは使�
 
 file(GLOB NAM_SOURCES
     ${namcore_SOURCE_DIR}/NAM/*.cpp
-    ${namcore_SOURCE_DIR}/NAM/*/*.cpp)
+    ${namcore_SOURCE_DIR}/NAM/*/*.cpp
+    ${namcore_SOURCE_DIR}/NAM/*.h          # ヘッダも登録（Xcodeの一覧に表示させるため）
+    ${namcore_SOURCE_DIR}/NAM/*/*.h)
 
 juce_add_plugin(NamPlayer
     COMPANY_NAME      "MyName"
@@ -35,7 +37,9 @@ juce_add_plugin(NamPlayer
     PRODUCT_NAME      "NAM Player")
 
 target_sources(NamPlayer PRIVATE
+    Source/PluginProcessor.h
     Source/PluginProcessor.cpp
+    Source/PluginEditor.h
     Source/PluginEditor.cpp
     ${NAM_SOURCES})
 
